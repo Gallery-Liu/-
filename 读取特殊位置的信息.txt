@@ -1,0 +1,12 @@
+#include <stdio.h>
+void main()
+{
+    FILE *fp;
+ char a[1000]="";
+ //假设1.log文件的内容是“100200300400”，要读取“200”数据
+ fp=fopen("c:\\1.log","r");
+ fseek(fp,3,0);//文件指针偏移3个字节到'2'
+ fread(a,3,1,fp);//读取3个字节大小数据即“200”
+ fclose(fp);
+ printf("%s\n",a);
+}
