@@ -1,0 +1,201 @@
+/*未加‘文件’，因此关闭程序后排行榜失效，而且现在排行榜数据的储存与读取是乱码（但积分排行还是正确的）*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define random(x) (rand()%x)  /*用于随机值*/
+
+struct player{
+	char name[10];
+	int score;};
+
+
+void main()
+{
+	int moshi,ax,RS=0,i=0,index=0;
+    int rank();
+struct player player[100];
+struct player pk;
+
+menu: /***************************************************主菜单**/
+printf("        剪刀·石头·布 大战   \n");
+printf("===================================\n");
+printf("输入指令以继续:\n");
+printf("                练习模式---7\n\n");
+printf("                积分模式---8\n\n");
+printf("                积 分 榜---9\n\n");
+printf("                退出程序:其他任意键\n");
+printf("===================================\n");
+scanf("%d",&moshi);
+     switch (moshi) /*共3种模式，原本是想弄3个自定义函数，可是自定义函数无法用goto返回主菜单，所以放弃自定义函数*/
+	 {
+
+/*****************************************************************************************************************************/
+	 case 7:                                                                                                       /*练习模式*/
+		 {
+			 printf("\n\n===================================\n");
+			 printf("             现在是 : 练习模式\n\n"); 
+		 {	
+	int a,b,c,n=1,x,win=0,lose=0,tie=0;
+	printf("欢迎来到练习模式。\n\n");
+	printf("练习模式一次对决9局，9局后会以您与电脑的胜利局数判断输赢。\n\n");
+      for(c=1;c<=9;c++)      
+	 {
+         
+		 printf("             第%d局             \n",n);
+	     printf("================================\n\n\n");    
+	     printf("1:剪刀   2:石头   3:布\n");
+	     scanf("%d",&a);
+      	 printf("================================\n");
+	  switch(a)        
+		{
+ 	      case 1:printf("   （你）剪刀VS");break;
+	      case 2:printf("   （你）石头VS");break;
+	      case 3:printf("   （你）布VS");break;
+	      default:printf("   输入错误，请重新输入\n");break;
+	  
+		 }
+      
+         srand((int)time(0));      
+		if(a<=3&&a>=1)        
+		{       
+           for(x=0;x<999;x++)    { b=random(3);}
+	 	       if(b==0)  printf("剪刀（电脑）\n");
+			   else if(b==1)  printf("石头（电脑）\n");
+			   else if(b==2)  printf("布（电脑）\n");
+                 
+         n++;
+		}
+        else printf("   输入错误，请重新输入\n");
+
+		if((a==1&&b==0)||(a==2&&b==1)||(a==3&&b==2))      printf("\n   第 %d 局: 平  局\n\n\n",n-1),tie++;        
+		else if((a==1&&b==1)||(a==2&&b==2)||(a==3&&b==0)) printf("\n   第 %d 局: 你输了\n\n\n",n-1),lose++;
+		else if((a==1&&b==2)||(a==2&&b==0)||(a==3&&b==1)) printf("\n   第 %d 局: 你赢了\n\n\n",n-1),win++;
+		else printf("   输入错误，请重新输入\n");
+
+	    printf("                                  目前赢%d局，输%d局,平局%d局\n\n\n",win,lose,tie);
+	printf("================================\n");	
+	}
+
+
+     if(win>lose)      {printf("           ======\n          [ 胜利 ]\n           ======\n");}
+     else if(lose>win) {printf("           ======\n          [ 失败 ]\n           ======\n");}
+     else              {printf("           ======\n          [ 平局 ]\n           ======\n");}
+};
+		 printf("是否继续？\n");
+		 printf("123-是(返回主菜单)  2-否(退出程序)\n");
+		 scanf("%d",&ax);
+		 if(ax==123) goto menu;/*goto语句，用于返回主菜单*/
+		 break;}
+		
+		 
+/*****************************************************************************************************************************/
+		 case 8:                                                                                                   /*积分模式*/
+			 {
+			 printf("现在是 : 积分模式\n\n\n");
+				{	int a,b,c,n=1,x,win=0,lose=0,tie=0,jf=0;
+	printf("欢 迎 来 到 积 分 模 式\n");RS=RS+1;
+
+	printf("积分模式为无限对战,胜利一场加5积分，平局加2积分，输一局扣4积分\n");
+
+
+/**********************************/
+	printf("请输入你的用户名：");
+	scanf("%s",player[RS].name);
+	 for (i=0;i<RS;i++)
+		 	{
+			 if (player[i].name,player[RS].name==0){index=i;break;}
+		 	}
+/**********************************/     
+
+	
+	for(c=1;c<=9999;c++)      
+	 {
+         printf("             第%d局             \n",n);
+	     printf("================================\n");      
+	     printf("1:剪刀   2:石头   3:布   123:返回主菜单 \n");
+	     scanf("%d",&a);
+
+
+
+		 if(a==123) {goto menu;}////////////*goto语句！！！！！ 用于按123时返回菜单*/////////////
+
+
+
+
+      	 printf("================================\n");
+	  switch(a)        
+		{
+ 	      case 1:printf("   （你）剪刀VS");break;
+	      case 2:printf("   （你）石头VS");break;
+	      case 3:printf("   （你）布VS");break;
+	      default:printf("   输入错误，请重新输入\n");break;
+	  
+		 }
+      
+         srand((int)time(0));      
+		if(a<=3&&a>=1)         
+		{       
+           for(x=0;x<999;x++)    { b=random(2);}
+	 	       if(b==0)  printf("剪刀（电脑）\n");
+			   else if(b==1)  printf("石头（电脑）\n");
+			   else if(b==2)  printf("布（电脑）\n");
+                 
+         n++;
+		}
+        else printf("   输入错误，请重新输入\n");
+
+		if((a==1&&b==0)||(a==2&&b==1)||(a==3&&b==2)) printf("\n          平局\n\n\n"),tie++,jf=jf+2;       
+		else if((a==1&&b==1)||(a==2&&b==2)||(a==3&&b==0)) printf("\n          你输了\n\n"),lose++,jf=jf-4;
+		else if((a==1&&b==2)||(a==2&&b==0)||(a==3&&b==1)) printf("\n          你赢了\n\n"),win++,jf=jf+5;
+		else printf("   输入错误，请重新输入\n");
+       player[RS].score=jf;
+	    printf("     目前赢%d局，输%d局,平局%d局\n\n\n",win,lose,tie);   
+		printf("现在积分为%d\n\n\n",jf);
+		printf("----------------------------------------------------------\n");
+				printf("----------------------------------------------------------\n");
+				printf("%s\n",&player[RS].name);
+				printf("%df\n",&player[RS].score);
+			 }};break;}
+
+
+
+/*****************************************************************************************************************************/
+		 case 9:printf("   积   分   榜   \n");                                                                      /*积分榜*/
+				{
+					int ik,jk,kk;
+		for(ik=0;ik<RS;ik++){
+			for(jk=ik+1;jk<=RS;jk++){
+				if(player[ik].score<player[jk].score){
+					pk=player[ik];
+					player[ik]=player[jk];
+					player[jk]=pk;
+				}
+			}
+		}
+	printf("*****************************************************************\n");
+	printf("			  排行榜\n\n");
+	printf("名次	姓名		    总分\n");
+	for(kk=0;kk<RS;kk++){
+		printf("%d %12s %18d\n",
+			&kk+1,&player[kk].name,&player[kk].score);
+	}
+	printf("*****************************************************************\n");
+
+				break;}
+		
+		 
+		 
+		 
+		 
+		 
+		 default:printf("   欢迎再来！\n"); break;
+	 }
+}
+
+
+
+
+
+
+
+
